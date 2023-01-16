@@ -19,7 +19,7 @@ db = DataBlock(
 
 uploads = Path(app.instance_path)/'uploads'
 models = Path(app.instance_path)/'models'
-models.mkdir(exist_ok=True)
+models.mkdir(parents=True, exist_ok=True)
 
 S3_URL = 'https://rushabh-ai-models.s3.us-west-2.amazonaws.com/trained.pth'
 # download the model from S3
