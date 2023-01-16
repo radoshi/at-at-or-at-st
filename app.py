@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 from fastcore.all import *
 from fastai.vision.all import *
+from fastdownload import download_url
 
 app = Flask(__name__)
 
@@ -17,7 +18,13 @@ db = DataBlock(
 )
 
 uploads = Path(app.instance_path)/'uploads'
-models = Path('models')
+models = Path(app.instance_path)/'models'
+models.mkdir(exist_ok=True)
+
+S3_URL = 'https://rushabh-ai-models.s3.us-west-2.amazonaws.com/trained.pth'
+# download the model from S3
+download_url(S3_URL, models)
+
 data = Path('data')
 
 dls = db.dataloaders(data, bs=32)
